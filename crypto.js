@@ -11,7 +11,7 @@ function cipher(buf, key = KEY, algorithm = ALGORITHM) {
   if (!(buf instanceof Buffer)) {
     buf = new Buffer(buf);
   }
-  var encrypted = "";
+  var encrypted = '';
   var cip = crypto.createCipher(algorithm, key);
   encrypted += cip.update(buf, 'utf8', 'hex');
   encrypted += cip.final('hex');
@@ -24,7 +24,7 @@ function cipher(buf, key = KEY, algorithm = ALGORITHM) {
  * @returns {String}
  */
 function decipher(encrypted, key = KEY, algorithm = ALGORITHM) {
-  var decrypted = "";
+  var decrypted = '';
   var decipher = crypto.createDecipher(algorithm, key);
   decrypted += decipher.update(encrypted, 'hex', 'utf8');
   decrypted += decipher.final('utf8');
@@ -33,12 +33,12 @@ function decipher(encrypted, key = KEY, algorithm = ALGORITHM) {
 
 const PUBLIC_KEY = `-----BEGIN PUBLIC KEY-----
 -----END PUBLIC KEY-----
-`
+`;
 const PRIVATE_KEY = `-----BEGIN PRIVATE KEY-----
 -----END PRIVATE KEY-----
-`
+`;
 const encryptPublickey = { key: PUBLIC_KEY, padding: crypto.constants.RSA_PKCS1_PADDING };
-const decryptPrivatekey =  { key: PRIVATE_KEY, padding: crypto.constants.RSA_PKCS1_PADDING };
+const decryptPrivatekey = { key: PRIVATE_KEY, padding: crypto.constants.RSA_PKCS1_PADDING };
 /**
  * @returns {Buffer}
  */
@@ -56,14 +56,14 @@ const privateDecrypt = crypto.privateDecrypt;
  * privateDecrypt(privateDecrypt, encoded).toString('utf8') === password;
  */
 export default {
-    aes: {
-      cipher: cipher,
-      decipher: decipher
-    },
-    rsa: {
-        encryptPublickey ,
-        decryptPrivatekey,
-        publicEncrypt,
-        privateDecrypt
-    }
+  aes: {
+    cipher: cipher,
+    decipher: decipher
+  },
+  rsa: {
+    encryptPublickey,
+    decryptPrivatekey,
+    publicEncrypt,
+    privateDecrypt
+  }
 };
